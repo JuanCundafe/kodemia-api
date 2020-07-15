@@ -1,0 +1,19 @@
+{
+  "name": "kodemia-api",
+  "version": "1.0.0",
+  "description": "API Kodemia",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JuanCundafe/kodemia-api.git"
+  },
+  "author": "JuanCundafe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JuanCundafe/kodemia-api/issues"
+  },
+  "homepage": "https://github.com/JuanCundafe/kodemia-api#readme"
+}
