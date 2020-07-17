@@ -45,11 +45,11 @@ try{
     }
 })
 
-router.delete('/:name', async (request, response) => {
+router.delete('/:id', async (request, response) => {
     try{
-        const deleteMentor = request.params.name
+        const deleteMentor = request.params.id
         console.log(deleteMentor)
-        const identifiedMentor = await mentors.getOne({name: deleteMentor})
+        const identifiedMentor = await mentors.getOne({_id: deleteMentor})
         const deleteMentorRemove = await mentors.remove(identifiedMentor)
     
         response.json({
@@ -67,10 +67,10 @@ router.delete('/:name', async (request, response) => {
         }
     })
 
-    router.patch('/:name', async (request, response) => {
+    router.patch('/:id', async (request, response) => {
         try{
-            const newDataMentor = request.params.name
-            const identifiedMentorPatch = await mentors.getOne({name: newDataMentor})
+            const newDataMentor = request.params.id
+            const identifiedMentorPatch = await mentors.getOne({_id: newDataMentor})
             const patchMentor = await mentors.patch(identifiedMentorPatch, request.body)
         
             response.json({

@@ -48,11 +48,11 @@ try{
     }
 })
 
-router.delete('/:name', async (request, response) => {
+router.delete('/:id', async (request, response) => {
     try{
-        const deleteKoder = request.params.name
+        const deleteKoder = request.params.id
         console.log(deleteKoder)
-        const identifiedKoder = await koders.getOne({name: deleteKoder})
+        const identifiedKoder = await koders.getOne({_id: deleteKoder})
         const deleteKoderRemove = await koders.remove(identifiedKoder)
     
         response.json({
@@ -70,11 +70,10 @@ router.delete('/:name', async (request, response) => {
         }
     })
 
-    router.patch('/:name', async (request, response) => {
+    router.patch('/:id', async (request, response) => {
         try{
-            const newDataKoder = request.params.name
-            console.log(newDataKoder)
-            const identifiedKoderPatch = await koders.getOne({name: newDataKoder})
+            const newDataKoder = request.params.id
+            const identifiedKoderPatch = await koders.getOne({_id: newDataKoder})
             console.log(identifiedKoderPatch)
             const patchKoder = await koders.patch(identifiedKoderPatch, request.body)
         
