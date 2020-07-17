@@ -1,21 +1,18 @@
-
 const express = require('express')
-
 
 const router = express.Router()
 
-const koders = require('../usecases/koders')
-
+const mentors = require('../usecases/mentors')
 const { response } = require('express')
 
 router.get('/', async (request, response) => {
     try{
-    const allKoders = await koders.getAll()
+    const allMentors = await mentors.getAll()
 
     response.json({
         success: true,
         data: {
-        koders: allKoders
+        mentors: allMentors
         }
     })
     } catch (error) {
@@ -29,14 +26,14 @@ router.get('/', async (request, response) => {
 
 router.post('/', async (request, response) => {
 try{
-    const newKodersData = request.body
+    const newMentorsData = request.body
 
-    const newKoder = await koders.create(newKodersData)
+    const newMentor = await mentors.create(newMentorsData)
 
     response.json({
         success: true,
         data:{
-            newKoder
+            newMentor
         }
     })
     } catch (error) {
@@ -50,15 +47,15 @@ try{
 
 router.delete('/:name', async (request, response) => {
     try{
-        const deleteKoder = request.params.name
-        console.log(deleteKoder)
-        const identifiedKoder = await koders.getOne({name: deleteKoder})
-        const deleteKoderRemove = await koders.remove(identifiedKoder)
+        const deleteMentor = request.params.name
+        console.log(deleteMentor)
+        const identifiedMentor = await mentors.getOne({name: deleteMentor})
+        const deleteMentorRemove = await mentors.remove(identifiedMentor)
     
         response.json({
             success: true,
             data:{
-                deleteKoderRemove
+                deleteMentorRemove
             }
         })
         } catch (error) {
@@ -72,16 +69,14 @@ router.delete('/:name', async (request, response) => {
 
     router.patch('/:name', async (request, response) => {
         try{
-            const newDataKoder = request.params.name
-            console.log(newDataKoder)
-            const identifiedKoderPatch = await koders.getOne({name: newDataKoder})
-            console.log(identifiedKoderPatch)
-            const patchKoder = await koders.patch(identifiedKoderPatch, request.body)
+            const newDataMentor = request.params.name
+            const identifiedMentorPatch = await mentors.getOne({name: newDataMentor})
+            const patchMentor = await mentors.patch(identifiedMentorPatch, request.body)
         
             response.json({
                 success: true,
                 data:{
-                    patchKoder
+                    patchMentor
                 }
             })
             } catch (error) {
