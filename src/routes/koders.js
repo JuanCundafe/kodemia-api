@@ -6,9 +6,23 @@ const router = express.Router()
 
 const koders = require('../usecases/koders')
 
+const auth = require('../middlewares/auth')
+
+router.use((request, response, next) => {
+    console.log('middleware a nivel del router: ', request.crowdsense)
+    next()
+}, (request, response, next) => {
+    console.log('middleware router 2')
+    next()
+})
+
 const { response } = require('express')
 
-router.get('/', async (request, response) => {
+router.get('/', (request, response, next) => {
+    console.log('middleware de endpoint GET Koders')
+    next()
+},
+async (request, response) => {
     try{
     const allKoders = await koders.getAll()
 
@@ -27,8 +41,9 @@ router.get('/', async (request, response) => {
     }
 })
 
-router.post('/', async (request, response) => {
+router.post('/', auth, async (request, response) => {
 try{
+    console.log('koder: ', request.koder)
     const newKodersData = request.body
 
     const newKoder = await koders.create(newKodersData)

@@ -1,9 +1,16 @@
 
 const mongoose = require('mongoose')
 
+const {
+    DB_USER,
+    DB_PASSWORD,
+    DB_HOST,
+    DB_NAME
+} = process.env
+
 function connect (){
     return mongoose.connect(
-        'mongodb+srv://JuanCundafe:kodemia8022_@juandatabase.u8k8x.mongodb.net/Kodemia?authSource=admin&replicaSet=atlas-4lg431-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true',
+        `mongodb+srv://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
         {
             useNewUrlParser: true,
             useUnifiedTopology: true
