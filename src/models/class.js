@@ -1,7 +1,7 @@
 
 const mongoose = require('mongoose')
 
-const mentorSchema = new mongoose.Schema({
+const classSchema = new mongoose.Schema({
     date: {
         type: String,
         required: true, 
@@ -10,8 +10,9 @@ const mentorSchema = new mongoose.Schema({
         type: String,
         enum: [
             'Charles',
-            'Isra'
-        ]
+            'Isra',
+            ], 
+    //classes: [{ type: classSchema.Types.ObjectId, ref: 'classes' }]
     },
     subject: {
         type: String,
@@ -19,4 +20,4 @@ const mentorSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('classes', mentorSchema)
+module.exports = mongoose.model('classes', classSchema)

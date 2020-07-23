@@ -5,7 +5,8 @@ const mentorSchema = new mongoose.Schema({
         type: String,
         required: true, 
         maxlength: 100,
-        minlength: 2
+        minlength: 2,
+        //classes: [{ type: mentorSchema.Types.ObjectId, ref: 'classes' }]
     },
     age: {
         type: Number,
