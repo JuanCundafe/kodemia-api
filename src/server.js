@@ -8,9 +8,12 @@ const mentorsRouter = require('./routes/mentors')
 
 const kodersRouter = require('./routes/koders')
 
+const classesRouter = require('./routes/classes')
+
 const authRouter = require('./routes/auth')
 
 const auth = require('./middlewares/auth')
+const printgify = require('./middlewares/print')
 
 const cors = require('cors')
 
@@ -29,9 +32,13 @@ app.use((request, response, next) => {
     next()
 } )
 
+app.use('/koders', printgify)
+
 app.use('/koders', kodersRouter)
 
 app.use('/mentors', mentorsRouter)
+
+app.use('/classes', classesRouter)
 
 app.use('/auth', authRouter)
 

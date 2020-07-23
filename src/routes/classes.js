@@ -1,34 +1,18 @@
-
 const express = require('express')
-
 
 const router = express.Router()
 
-const koders = require('../usecases/koders')
-
-const auth = require('../middlewares/auth')
-
-router.use((request, response, next) => {
-    console.log('middleware a nivel del router: ', request.crowdsense)
-    next()
-}, (request, response, next) => {
-    next()
-})
-
+const classes = require('../usecases/classes')
 const { response } = require('express')
 
-router.get('/', (request, response, next) => {
-    console.log('middleware de endpoint GET Koders')
-    next()
-},
-async (request, response) => {
+router.get('/', async (request, response) => {
     try{
-    const allKoders = await koders.getAll()
+    const allClasses = await classes.getAll()
 
     response.json({
         success: true,
         data: {
-        koders: allKoders
+        classes: allClasses
         }
     })
     } catch (error) {
@@ -40,17 +24,16 @@ async (request, response) => {
     }
 })
 
-router.post('/', auth, async (request, response) => {
+router.post('/', async (request, response) => {
 try{
-    console.log('koder: ', request.koder)
-    const newKodersData = request.body
+    const newClassesData = request.body
 
-    const newKoder = await koders.create(newKodersData)
+    const newClass = await classes.create(newClassesData)
 
     response.json({
         success: true,
         data:{
-            newKoder
+            newClass
         }
     })
     } catch (error) {
@@ -64,15 +47,14 @@ try{
 
 router.delete('/:id', async (request, response) => {
     try{
-        const deleteKoder = request.params.id
-        console.log(deleteKoder)
-        const identifiedKoder = await koders.getOne({_id: deleteKoder})
-        const deleteKoderRemove = await koders.remove(identifiedKoder)
+        const deleteClass = request.params.id
+        const identifiedClass = await classes.getOne({_id: deleteClass})
+        const deleteClassRemove = await classes.remove(identifiedClass)
     
         response.json({
             success: true,
             data:{
-                deleteKoderRemove
+                deleteClassRemove
             }
         })
         } catch (error) {
@@ -86,15 +68,14 @@ router.delete('/:id', async (request, response) => {
 
     router.patch('/:id', async (request, response) => {
         try{
-            const newDataKoder = request.params.id
-            const identifiedKoderPatch = await koders.getOne({_id: newDataKoder})
-            console.log(identifiedKoderPatch)
-            const patchKoder = await koders.patch(identifiedKoderPatch, request.body)
+            const newDataClass = request.params.id
+            const identifiedClassPatch = await classes.getOne({_id: newDataClass})
+            const patchClass = await classes.patch(identifiedClassPatch, request.body)
         
             response.json({
                 success: true,
                 data:{
-                    patchKoder
+                    patchClass
                 }
             })
             } catch (error) {
