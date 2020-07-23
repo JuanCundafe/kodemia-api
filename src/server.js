@@ -32,7 +32,7 @@ app.use((request, response, next) => {
     next()
 } )
 
-app.use('/koders', printgify)
+app.use(printgify)
 
 app.use('/koders', kodersRouter)
 
